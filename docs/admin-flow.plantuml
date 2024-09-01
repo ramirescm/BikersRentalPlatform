@@ -1,0 +1,34 @@
+@startuml
+actor Admin
+
+Admin -> MotorcycleService: Add New Motorcycle (ID, Year, Model, License Plate)
+MotorcycleService -> Database: Check License Plate Uniqueness
+Database --> MotorcycleService: Valid Plate
+MotorcycleService -> MessagingService: Publish MotorcycleRegistered Event
+MotorcycleService -> Database: Store Motorcycle Data
+Database --> MotorcycleService: Success
+MotorcycleService --> Admin: Motorcycle Registered
+
+MessagingService -> Year2024Consumer: Send Event if Year = 2024
+Year2024Consumer -> Database: Store Notification for Year 2024
+Database --> Year2024Consumer: Success
+
+Admin -> MotorcycleService: List Motorcycles (Filter by Plate)
+MotorcycleService -> Database: Query Motorcycles with Filter
+Database --> MotorcycleService: Return Filtered Motorcycles
+MotorcycleService --> Admin: Display Filtered Motorcycles
+
+Admin -> MotorcycleService: Update Motorcycle Plate
+MotorcycleService -> Database: Check Motorcycle Exists
+Database --> MotorcycleService: Exists
+MotorcycleService -> Database: Update Plate
+Database --> MotorcycleService: Success
+MotorcycleService --> Admin: Plate Updated
+
+Admin -> MotorcycleService: Remove Motorcycle
+MotorcycleService -> Database: Check Rental Records
+Database --> MotorcycleService: No Rentals
+MotorcycleService -> Database: Delete Motorcycle
+Database --> MotorcycleService: Success
+MotorcycleService --> Admin: Motorcycle Removed
+@enduml

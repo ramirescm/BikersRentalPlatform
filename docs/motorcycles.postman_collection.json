@@ -1,0 +1,307 @@
+{
+	"info": {
+		"_postman_id": "730cad3a-a7ff-4e97-afec-32e2ed5ae567",
+		"name": "motorcycles",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29595933"
+	},
+	"item": [
+		{
+			"name": "users-create-admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"admin@mail.com\",\n  \"name\": \"admin\",\n  \"password\": \"123456\",\n  \"role\": \"ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5046/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5046",
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users-create-deliver",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"deliver@mail.com\",\n  \"name\": \"deliver\",\n  \"password\": \"123456\",\n  \"role\": \"DELIVER\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5046/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5046",
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "token",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "motorcycles-add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"year\": 2023,\n  \"model\": \"Honda CB 500\",\n  \"licensePlate\": \"ABC1234\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5046/v1/motorcycles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5046",
+					"path": [
+						"v1",
+						"motorcycles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "motorcycles-list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5046/v1/motorcycles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5046",
+					"path": [
+						"v1",
+						"motorcycles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "motorcycles-delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5046/v1/motorcycles/789c063d-b098-4f29-bd15-492deb2503d8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5046",
+					"path": [
+						"v1",
+						"motorcycles",
+						"789c063d-b098-4f29-bd15-492deb2503d8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "motorcycles-update-license",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"ba6f4a93-6b38-4ea6-b6ce-5240c2fb6c50\",\n    \"licensePlate\": \"AAA1111\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5046/v1/motorcycles/ba6f4a93-6b38-4ea6-b6ce-5240c2fb6c50/licenseplate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5046",
+					"path": [
+						"v1",
+						"motorcycles",
+						"ba6f4a93-6b38-4ea6-b6ce-5240c2fb6c50",
+						"licenseplate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deliverer-and-user-create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"name\": \"John Doe\",\n  \"cnpj\": \"12345678987654\",\n  \"birthDate\": \"1990-01-01\",\n  \"cnhNumber\": \"11111111111\",\n  \"cnhType\": \"A\",\n  \"cnhPathImage\": \"/images/cnh/john_doe_cnh.jpg\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5046/v1/deliverers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5046",
+					"path": [
+						"v1",
+						"deliverers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deliverer-upload-image",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/ramiresmarques/Downloads/2019-05-17_19-51-58-e91f2d88bd38385d4221ce59c98a1ec8.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5046/v1/deliverers/904f0867-d0cc-4f77-a76e-69f79bcdde21/cnhphoto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5046",
+					"path": [
+						"v1",
+						"deliverers",
+						"904f0867-d0cc-4f77-a76e-69f79bcdde21",
+						"cnhphoto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rentals",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5046/v1/rentals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5046",
+					"path": [
+						"v1",
+						"rentals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rentals-add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"motorcycleId\": \"ba6f4a93-6b38-4ea6-b6ce-5240c2fb6c50\",\n  \"delivererId\": \"50081105-7ffc-4ac8-9795-5319f6a9d60a\",\n  \"rentalPlanId\": \"a68acf27-aa01-48b6-a886-f42077e6b9d2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5046/v1/rentals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5046",
+					"path": [
+						"v1",
+						"rentals"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rental-plan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5046/v1/rentals-plans",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5046",
+					"path": [
+						"v1",
+						"rentals-plans"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

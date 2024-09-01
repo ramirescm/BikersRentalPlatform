@@ -1,0 +1,43 @@
+version: "3.8"
+services:
+  bikers-postgres:
+    image: postgres:15.3-alpine
+    container_name: bikers-postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+      POSTGRES_DB: bikers
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql
+  bikers-pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: bikers-pgadmin
+    restart: always
+    depends_on:
+      - bikers-postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@localhost.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - 5051:80
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672" # RabbitMQ default port for client connections
+      - "15672:15672" # RabbitMQ Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    volumes:
+      - ./data/rabbitmq-data:/var/lib/rabbitmq
+
+networks:
+  default:
+    name: local-network

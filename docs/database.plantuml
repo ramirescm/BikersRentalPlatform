@@ -1,0 +1,66 @@
+@startuml
+entity "Deliverers" as deliverers {
+    * id : UUID
+    --
+    * name : VARCHAR(100)
+    * cnpj : CHAR(14) <<UNIQUE>>
+    * birth_date : DATE
+    * cnh_number : CHAR(11) <<UNIQUE>>
+    * cnh_type : VARCHAR(3) <<CHECK (IN ('A', 'B', 'A+B'))>>
+    cnh_path_image : VARCHAR(200)
+}
+
+entity "Motorcycles" as motorcycles {
+    * id : UUID
+    --
+    * year : INT
+    * model : VARCHAR(255)
+    * license_plate : VARCHAR(20) <<UNIQUE>>
+}
+
+entity "Rental Plans" as rental_plans {
+    * id : UUID <<DEFAULT gen_random_uuid()>>
+    --
+    * days : INT
+    * amount : DECIMAL(10, 2)
+    * fee : DECIMAL(10, 2)
+}
+
+entity "Users" as users {
+    * id : UUID <<DEFAULT gen_random_uuid()>>
+    --
+    * name : VARCHAR(100)
+    * email : VARCHAR(255) <<UNIQUE>>
+    * role : VARCHAR(50)
+    * password : VARCHAR(255)
+}
+
+entity "Motorcycle Rentals" as motorcycle_rentals {
+    * id : UUID <<DEFAULT gen_random_uuid()>>
+    --
+    * motorcycle_id : UUID
+    * deliverer_id : UUID
+    * rental_plan_id : UUID
+    * start_date : TIMESTAMP WITH TIME ZONE
+    * end_date : TIMESTAMP WITH TIME ZONE
+    * expected_finish_date : TIMESTAMP WITH TIME ZONE
+    * created_at : TIMESTAMP WITH TIME ZONE
+    * amount_predicted : NUMERIC(10, 2)
+    * amount_paid : NUMERIC(10, 2)
+}
+
+entity "Motorcycle Notifications" as motorcycle_notifications {
+    * id : UUID <<DEFAULT gen_random_uuid()>>
+    --
+    * motorcycle_id : UUID
+    * year : INT
+    * model : VARCHAR(255)
+    * license_plate : VARCHAR(20)
+    * created_at : TIMESTAMP WITH TIME ZONE
+}
+
+deliverers ||--o{ motorcycle_rentals : "deliverer_id"
+motorcycles ||--o{ motorcycle_rentals : "motorcycle_id"
+rental_plans ||--o{ motorcycle_rentals : "rental_plan_id"
+motorcycles ||--o{ motorcycle_notifications : "motorcycle_id"
+@enduml

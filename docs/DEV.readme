@@ -1,0 +1,22 @@
+# DEV
+
+## using database first but below has sample how use migrations in this project
+
+## SAMPLE HOW GENERATE MIGRATION
+
+
+### Add Migration
+
+dotnet ef migrations add NewMigration --project src/Motorcycle.Data --startup-project src/Motorcycle.Api
+
+### Update database
+
+dotnet ef database update --project src/Motorcycle.Data --startup-project src/Motorcycle.Api
+
+### Initial state database
+
+dotnet ef database update 0 --project src/Motorcycle.Data --startup-project src/Motorcycle.Api
+
+### Remove migration
+
+dotnet ef migrations remove --project src/Motorcycle.Data --startup-project src/Motorcycle.Api

@@ -1,0 +1,32 @@
+@startuml
+actor Deliverer
+
+Deliverer -> Platform: Register as Deliverer (ID, Name, CNPJ, Birth Date, CNH Number, CNH Type, CNH Image)
+Platform -> Database: Check CNPJ and CNH Number Uniqueness
+Database --> Platform: Valid Data
+Platform -> FileStorageService: Save CNH Image (PNG/BMP)
+FileStorageService --> Platform: Image Saved
+Platform -> Database: Store Deliverer Data
+Database --> Platform: Success
+Platform --> Deliverer: Registration Completed
+
+Deliverer -> FileStorageService: Upload CNH Image Update
+FileStorageService -> FileService: Validate and Save (PNG/BMP)
+FileService --> FileStorageService: Success
+FileStorageService --> Deliverer: Image Updated
+
+Deliverer -> RentalService: Rent Motorcycle (Motorcycle ID, Plan ID)
+RentalService -> Database: Validate Motorcycle and Deliverer
+Database --> RentalService: Valid Data
+RentalService -> Database: Store Rental with Start and End Dates
+Database --> RentalService: Success
+RentalService --> Deliverer: Rental Confirmed
+
+Deliverer -> RentalService: Return Motorcycle (Actual Return Date)
+RentalService -> Database: Fetch Rental Details
+Database --> RentalService: Return Data
+RentalService -> RentalService: Calculate Total Rent Cost
+RentalService -> Database: Update Return Date and Cost
+Database --> RentalService: Success
+RentalService --> Deliverer: Show Total Cost with Penalties or Additional Fees
+@enduml
