@@ -58,6 +58,7 @@ The platform integrates with RabbitMQ for event-driven communication:
 3. **Executin tests**
 
    - **acess folder where is .sln and Run**: `dotnet test`
+     ![Swagger Documentation](./images/tests.png)
 
 ## Swagger documentation
 
