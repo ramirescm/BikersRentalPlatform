@@ -55,6 +55,10 @@ The platform integrates with RabbitMQ for event-driven communication:
 
    - **URL**: `http://localhost/swagger/index.html`
 
+3. **Executin tests**
+
+   - **acess folder where is .sln and Run**: `dotnet test`
+
 ## Swagger documentation
 
 ![Swagger Documentation](./images/swagger.png)
